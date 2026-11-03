@@ -1,0 +1,16 @@
+# Built-in defaults. Override in ~/.config/prompt/config.yml or .prompt.yml at a repo root.
+version: 1
+mode: execute                 # execute | save | handoff
+depth: standard               # quick | standard | deep
+one_question_at_a_time: true
+spec_format: xml              # xml | markdown
+sections: []                  # extra sections, inserted before <references>
+save_to: docs/specs
+save_on_approval: false
+sensitive_data: [secrets, pii]
+extra_questions: []
+capabilities:
+  code-analysis: [subagent:explore, builtin]
+  implement:     [builtin]
+  verify:        [builtin]
+rules: []

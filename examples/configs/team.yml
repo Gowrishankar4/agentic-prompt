@@ -1,0 +1,46 @@
+# Copy to ~/.config/prompt/config.yml (personal) or .prompt.yml (one repo, shared with the team).
+version: 1
+
+mode: execute                 # save → write the spec and stop; handoff is used automatically by calling skills
+depth: standard
+spec_format: xml
+save_to: docs/specs
+save_on_approval: true        # keep every approved spec in the repo
+sensitive_data: [secrets, pii]
+
+# Extra sections every spec must have
+sections: [rollout]
+
+# Questions your team always wants answered
+extra_questions:
+  - id: feature-flag
+    question: Which feature flag gates this, and who turns it on?
+    when: { subtypes: [feature] }
+  - id: analytics
+    question: Which analytics events should fire?
+    when: { request_matches: "(?i)signup|checkout|onboarding" }
+
+# Your own tools for each step (first available wins)
+capabilities:
+  code-analysis: [skill:code-graph, subagent:explore, builtin]
+  implement:     [skill:tdd, builtin]
+  verify:        [command:/verify, script:"npm test && npm run lint"]
+  security-review: [skill:security-review]
+
+# Your own skills or instructions on events
+rules:
+  - id: security-on-auth
+    on_event: [after_spec]
+    when: { request_matches: "(?i)auth|login|token|permission|payment" }
+    mode: required
+    use: security-review
+    instruction: Add security requirements and acceptance criteria before the spec is shown.
+  - id: perf-budget
+    on_event: [after_spec]
+    when: { paths: ["src/api/**"] }
+    mode: advisory
+    instruction: Add a p95 latency budget to the constraints.
+  - id: plain-language
+    trigger: always
+    mode: advisory
+    instruction: Write the spec in plain English; no internal codenames.

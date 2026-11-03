@@ -1,0 +1,14 @@
+{
+  "name": "agentic-prompt",
+  "description": "Requirement interview → approved spec → execution, for AI agents.",
+  "owner": {
+    "name": "Gowrishankar Sivagnanam"
+  },
+  "plugins": [
+    {
+      "name": "prompt",
+      "source": "./plugins/prompt",
+      "description": "Rough request → guided interview → approved XML spec → execute, save or hand off → validate."
+    }
+  ]
+}

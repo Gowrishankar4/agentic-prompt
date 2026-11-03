@@ -1,0 +1,13 @@
+{
+  "name": "prompt",
+  "version": "1.0.0",
+  "description": "Turn a rough request into an approved, implementation-ready spec: classify it, read the code first, interview for only what's missing, write a structured XML spec, get approval, then execute, save or hand it off — and validate against its acceptance criteria. Configurable depth, questions, tools and event hooks.",
+  "author": {
+    "name": "Gowrishankar Sivagnanam",
+    "email": "gowrishankarsivagnanam@gmail.com"
+  },
+  "homepage": "https://github.com/Gowrishankar4/agentic-prompt",
+  "repository": "https://github.com/Gowrishankar4/agentic-prompt",
+  "license": "MIT",
+  "keywords": ["prompt", "requirements", "interview", "spec", "specification", "planning", "acceptance-criteria", "agents", "workflow"]
+}

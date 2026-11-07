@@ -3,7 +3,7 @@
 import json, pathlib, re, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILL = ROOT / "plugins/prompt/skills/prompt"
-VAL = SKILL / "scripts/validate_spec.py"
+VAL = ROOT / "tools/validate_spec.py"
 errors = []
 def err(m): errors.append(m); print("ERROR:", m)
 

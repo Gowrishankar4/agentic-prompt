@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "prompt",
+      "name": "agentic-prompt",
       "source": "./plugins/prompt",
       "description": "Rough request → guided interview → approved XML spec → execute, save or hand off → validate."
     }

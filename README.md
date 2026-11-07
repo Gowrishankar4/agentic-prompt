@@ -97,8 +97,8 @@ Events: `before_interview`, `after_classify`, `after_spec`, `after_approval`, `a
 
 Check a spec or config:
 ```bash
-python3 plugins/prompt/skills/prompt/scripts/validate_spec.py docs/specs/2026-11-03-audit-log-export.md
-python3 plugins/prompt/skills/prompt/scripts/validate_spec.py --validate-config .prompt.yml
+python3 tools/validate_spec.py docs/specs/2026-11-03-audit-log-export.md
+python3 tools/validate_spec.py --validate-config .prompt.yml
 ```
 
 ## Works with Agentic Playbook

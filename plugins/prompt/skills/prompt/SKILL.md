@@ -56,7 +56,7 @@ Questions from `references/question-bank.md` for the subtype, at the configured 
 - The user pastes secrets or personal data → ask them to redact before continuing.
 
 ### 5. Write the spec
-Fill `references/spec-format.md` in the configured format (XML default, or markdown). Every requirement has an ID and is covered by at least one acceptance criterion; every TBD appears in `<open_questions>`. If scripts can run, check it with `scripts/validate_spec.py` before showing it.
+Fill `references/spec-format.md` in the configured format (XML default, or markdown). Every requirement has an ID and is covered by at least one acceptance criterion; every TBD appears in `<open_questions>`. Before showing it, check it yourself against `references/spec-format.md`: every requirement ID is covered by an acceptance criterion, every TBD is in `<open_questions>`, no secrets or personal data. If the user has the repository's `tools/validate_spec.py` and scripts can run, run it too.
 
 ### 6. Approve
 Show the spec, then the assumptions and open questions on their own lines. Ask: approve, edit, or answer the open questions. Edits → revise and show again. Do nothing else until approved. Fire `after_approval`.

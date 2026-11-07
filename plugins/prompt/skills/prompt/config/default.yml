@@ -2,7 +2,8 @@
 version: 1
 mode: execute                 # execute | save | handoff
 depth: standard               # quick | standard | deep
-one_question_at_a_time: true
+one_question_at_a_time: true   # one topic per message, ≤ 4 related questions
+approval_view: summary         # summary | spec
 spec_format: xml              # xml | markdown
 sections: []                  # extra sections, inserted before <references>
 save_to: docs/specs

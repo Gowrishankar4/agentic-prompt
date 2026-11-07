@@ -4,6 +4,7 @@ version: 1
 mode: execute                 # save → write the spec and stop; handoff is used automatically by calling skills
 depth: standard
 spec_format: xml
+approval_view: summary        # spec → always show the full XML spec for approval
 save_to: docs/specs
 save_on_approval: true        # keep every approved spec in the repo
 sensitive_data: [secrets, pii]

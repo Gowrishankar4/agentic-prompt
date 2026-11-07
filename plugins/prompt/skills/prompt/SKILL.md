@@ -50,7 +50,8 @@ Use the `code-analysis` capability (your mapped skill, a subagent, else read/sea
 ### 4. Interview
 Questions from `references/question-bank.md` for the subtype, at the configured depth, plus `extra_questions` whose `when` matches.
 - `quick` ≤ 3 questions · `standard` ≤ 8 · `deep` — every section probed, no cap.
-- One question at a time (default) or batched (`one_question_at_a_time: false`); offer 2–4 likely answers where you can.
+- One **topic** per message (default): up to 4 tightly related questions, each with 2–4 lettered options and a marked recommendation, so one reply like `1b 2a` answers them. `one_question_at_a_time: false` = every remaining question in one message.
+- **Recommend the smallest option that fits the request as written.** Recommend going further (extra scope, stricter rules, new behaviour) only when the code or the request gives a reason, and say what that reason is.
 - "You decide" / "default" → pick the clean standard option and record it under `<assumptions>`.
 - Only someone else can answer → don't block: record it under `<open_questions>` with the owner.
 - The user pastes secrets or personal data → ask them to redact before continuing.
@@ -59,7 +60,9 @@ Questions from `references/question-bank.md` for the subtype, at the configured 
 Fill `references/spec-format.md` in the configured format (XML default, or markdown). Every requirement has an ID and is covered by at least one acceptance criterion; every TBD appears in `<open_questions>`. If scripts can run, check it with `scripts/validate_spec.py` before showing it.
 
 ### 6. Approve
-Show the spec, then the assumptions and open questions on their own lines. Ask: approve, edit, or answer the open questions. Edits → revise and show again. Do nothing else until approved. Fire `after_approval`.
+Show the **approval view** (`approval_view`, default `summary`): the outcome in one sentence, the requirements in plain words (one line each, with their IDs), then assumptions and open questions on their own lines — no file paths unless they matter to the reader. The full spec is written either way: show it when the user asks ("show the spec"), when `approval_view: spec`, or in `save` and `handoff` modes, where the spec is the deliverable. Ask: approve, edit, or answer the open questions. Edits → revise and show again. Do nothing else until approved. Fire `after_approval`.
+
+**Fast path — the request was already complete.** If the interview asked nothing (every required section came from the request or the code) and there are no open questions, the approval view is three lines at most: what will be done, the acceptance criteria in one line, any assumption. If the request itself already says to go ahead ("go ahead", "no need to confirm", "just do it"), treat that as approval of this summary and continue to step 7 without waiting; otherwise ask for a one-word yes. Never use the fast path in `handoff` mode, or when an assumption changes behaviour the request didn't mention.
 
 ### 7. Execute, save or hand off (by mode)
 - **execute** — exactly the spec's scope, using the `implement` capability if mapped. Anything that changes scope → stop and update the spec (and re-approve) before continuing. Destructive or irreversible steps still get their own confirmation.
@@ -81,6 +84,8 @@ Teams map their own skills to **capabilities** (`code-analysis`, `implement`, `v
 | "I'll ask about the code structure" | Read the code first; ask only to confirm. |
 | "I'll pick a sensible value for that limit" | Unknown → ask, or `<TBD>` in open questions. "You decide" → assumption, recorded. |
 | "Ten questions to be thorough" | Ask the minimum; depth sets the ceiling, not the target. |
+| "I'll recommend the fuller option — it's better" | Recommend the smallest option that fits the request; go further only with a stated reason from the code or the request. |
+| "The user will want the full XML to approve" | Show the plain approval view; the spec is there on request. |
 | "They approved the gist — start coding" | Approval is of the written spec. Show it, get a yes. |
 | "Small scope change, I'll just include it" | Stop, update the spec, re-approve. |
 | "Called by another skill — I'll execute too" | Handoff mode never executes. |

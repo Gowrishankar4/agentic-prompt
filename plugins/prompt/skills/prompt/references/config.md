@@ -8,7 +8,8 @@ YAML, every key optional. Precedence, highest first: the user's words in the req
 |---|---|---|
 | `mode` | `execute` | `execute` · `save` · `handoff` (forced when another skill calls) |
 | `depth` | `standard` | `quick` (≤ 3 questions) · `standard` (≤ 8) · `deep` (no cap) |
-| `one_question_at_a_time` | `true` | `false` batches questions in one message |
+| `one_question_at_a_time` | `true` | `true` = one topic per message (≤ 4 related questions, each with options); `false` = every remaining question at once |
+| `approval_view` | `summary` | `summary` (plain-language view, full spec on request) · `spec` (always show the full spec) |
 | `spec_format` | `xml` | `xml` · `markdown` |
 | `sections` | standard set | extra section names, inserted before `references` |
 | `save_to` | `docs/specs` | folder for `save` mode (and for execute mode if `save_on_approval: true`) |
@@ -54,4 +55,4 @@ Conditions (`when`): `types` (technical / general), `subtypes`, `paths` (files t
 
 ## Safety rails — config cannot loosen these
 
-No execution before approval · no sensitive values in the spec · handoff mode never executes · scope changes stop for re-approval · destructive steps confirmed separately.
+No execution before approval (the fast path only skips the wait when the request itself said to go ahead) · no sensitive values in the spec · handoff mode never executes · scope changes stop for re-approval · destructive steps confirmed separately.

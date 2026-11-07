@@ -18,7 +18,7 @@ SENSITIVE = {
     "pci": [r"(?i)\bcvv\s*[:=]\s*\d{3,4}\b"],
 }
 EVENTS = {"before_interview", "after_classify", "after_spec", "after_approval", "after_execute", "after_validate"}
-KEYS = {"version", "mode", "depth", "one_question_at_a_time", "spec_format", "sections", "save_to", "save_on_approval",
+KEYS = {"version", "mode", "depth", "one_question_at_a_time", "approval_view", "spec_format", "sections", "save_to", "save_on_approval",
         "sensitive_data", "extra_questions", "capabilities", "rules", "include"}
 ENTRY = re.compile(r"^(skill:.+|command:/.+|mcp:.+|mcp\?.+|script:.+|subagent:.+|instruction:.+|builtin|none)$")
 
@@ -96,7 +96,7 @@ def check_config(path):
     except yaml.YAMLError as e:
         print(f"YAML error: {e}\nTip: quote entries with '?', e.g. \"mcp?jira comment\""); return 1
     probs = [f"unknown key '{k}'" for k in cfg if k not in KEYS]
-    for k, v in {"mode": ("execute", "save", "handoff"), "depth": ("quick", "standard", "deep"), "spec_format": ("xml", "markdown")}.items():
+    for k, v in {"mode": ("execute", "save", "handoff"), "depth": ("quick", "standard", "deep"), "spec_format": ("xml", "markdown"), "approval_view": ("summary", "spec")}.items():
         if k in cfg and cfg[k] not in v:
             probs.append(f"{k} must be one of {v}")
     for name, chain in (cfg.get("capabilities") or {}).items():

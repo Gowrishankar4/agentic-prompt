@@ -12,7 +12,8 @@ request → classify → read the code → interview → XML spec → APPROVAL �
 ```
 
 - **Reads before it asks.** For technical work it inspects the codebase first and only asks you to confirm.
-- **Asks the minimum.** `quick` ≤ 3 questions, `standard` ≤ 8, `deep` probes everything. Skips anything already answered.
+- **Asks the minimum.** `quick` ≤ 3 questions, `standard` ≤ 8, `deep` probes everything. Skips anything already answered. Related questions come together, each with options and a recommendation — and it recommends the smallest option that fits your request.
+- **Plain approval view.** You approve a short plain-language summary; the full spec is one request away. Already-complete requests get a three-line confirmation instead of an interview.
 - **One fixed spec shape.** Context, task, requirements, constraints, acceptance criteria, out of scope, references, output, assumptions, open questions.
 - **Approval is the gate.** Nothing runs until you approve the written spec.
 - **Proves the result.** One line per acceptance criterion: ✅ met · ❌ not met · ⚪ not testable here — with evidence.
@@ -43,17 +44,20 @@ git clone https://github.com/Gowrishankar4/agentic-prompt && cd agentic-prompt
 
 Classified: technical · feature. I found the audit page in web/src/pages/admin/AuditLog.tsx
 and the query in api/src/audit/query.ts (cursor-based).
-1. Maximum date range? → (a) 30 days (b) 90 days (c) unlimited
-> b
-2. Should it run in the background and email a link?
-> yes, link valid 24h
-3. Are IP addresses shown in full?
+Topic 1 of 2 — limits and delivery
+1. Maximum date range? (a) 30 days ← recommended, matches the page's filter (b) 90 days (c) unlimited
+2. Delivery? (a) download in the browser ← recommended (b) background job + emailed link
+> 1b 2b, link valid 24h
+Topic 2 of 2 — data
+3. Are IP addresses shown in full? (a) yes (b) masked ← recommended
 > ask the privacy lead
 
-<spec id="audit-log-export" type="feature" status="DRAFT"> … </spec>
+Admins can export up to 90 days of the audit log as CSV, delivered by an emailed link.
+  R1 export any range up to 90 days · R2 runs in the background, emails a link valid 24h
+  R3 columns follow the on-screen order · R4 respects the current filters
 Assumptions: CSV columns follow the on-screen order.
 Open questions: unmasked IPs allowed? → Privacy lead
-Approve, edit, or answer the open question?
+Approve, edit, answer the open question — or "show the spec" for the full XML?
 > approved
 
 … builds it …

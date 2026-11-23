@@ -1,0 +1,18 @@
+{
+  "name": "agentic-prompt",
+  "owner": {
+    "name": "Gowrishankar Sivagnanam"
+  },
+  "metadata": {
+    "description": "Turn a rough request into an approved, implementation-ready spec: classify it, read the code first, interview for only what's missing, write a structured XML spec, get approval, then execute, save or hand it off — and validate against its acceptance criteria. Configurable depth, questions, tools and event hooks.",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "agentic-prompt",
+      "source": "plugins/prompt",
+      "description": "Turn a rough request into an approved, implementation-ready spec: classify it, read the code first, interview for only what's missing, write a structured XML spec, get approval, then execute, save or hand it off — and validate against its acceptance criteria. Configurable depth, questions, tools and event hooks.",
+      "category": "productivity"
+    }
+  ]
+}

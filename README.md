@@ -29,6 +29,8 @@ request → classify → read the code → interview → XML spec → APPROVAL �
 /plugin install prompt@agentic-prompt
 ```
 
+**Cursor (plugin)** — this repo is a Cursor plugin (`.cursor-plugin/`). To try it before it's listed in the Cursor Marketplace, copy `plugins/prompt` to `~/.cursor/plugins/local/agentic-prompt` and reload the window.
+
 **Cursor, Codex, Gemini CLI, Windsurf — any agent with a skills folder**
 ```bash
 git clone https://github.com/Gowrishankar4/agentic-prompt && cd agentic-prompt
